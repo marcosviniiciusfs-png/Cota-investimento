@@ -15,7 +15,7 @@ const HeroSection = ({ onSimulateClick }: HeroSectionProps) => {
   ];
 
   return (
-    <section className="py-16 md:py-24" style={{ backgroundColor: '#a1b6fb' }}>
+    <section className="py-16 md:py-24" style={{ backgroundColor: '#e7f3ff' }}>
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Coluna Esquerda - Texto e CTA */}

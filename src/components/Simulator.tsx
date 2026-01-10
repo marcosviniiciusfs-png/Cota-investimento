@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,6 +28,7 @@ interface SimulatorData {
 const Simulator = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<SimulatorData>({
     propertyType: "",
     creditAmount: "",
@@ -119,11 +121,6 @@ const Simulator = () => {
       });
 
       if (response.ok) {
-        toast({
-          title: "Simulação enviada com sucesso!",
-          description: "Em breve você receberá o resultado no WhatsApp.",
-        });
-        
         setFormData({
           propertyType: "",
           creditAmount: "",
@@ -135,6 +132,7 @@ const Simulator = () => {
           whatsapp: "",
         });
         setCurrentStep(1);
+        navigate("/obrigado");
       } else {
         throw new Error("Erro ao enviar simulação");
       }

@@ -44,6 +44,8 @@ const Simulator = () => {
   const totalSteps = 6;
   const progress = (currentStep / totalSteps) * 100;
 
+  const removeAccents = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
   const formatCurrency = (value: string) => {
     const numbers = value.replace(/\D/g, "");
     const formatted = new Intl.NumberFormat("pt-BR", {

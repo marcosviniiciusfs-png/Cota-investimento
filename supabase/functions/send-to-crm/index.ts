@@ -9,6 +9,7 @@ interface LeadData {
   telefone: string;
   whatsapp: string;
   tipo: string;
+  interesse: string;
   valor_do_credito: string;
   valor_de_entrada: string;
   cidade: string;

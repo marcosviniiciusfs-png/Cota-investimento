@@ -114,6 +114,7 @@ const Simulator = () => {
       telefone: formData.whatsapp,
       whatsapp: formData.whatsapp,
       tipo: formData.propertyType,
+      interesse: formData.propertyType,
       valor_do_credito: formData.creditAmount,
       valor_de_entrada: formData.hasDownPayment === "Não" ? "R$ 0,00" : formData.downPaymentAmount,
       cidade: formData.city,

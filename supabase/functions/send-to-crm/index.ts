@@ -9,6 +9,7 @@ interface LeadData {
   telefone: string;
   whatsapp: string;
   tipo: string;
+  interesse: string;
   valor_do_credito: string;
   valor_de_entrada: string;
   cidade: string;
@@ -43,7 +44,7 @@ Deno.serve(async (req) => {
       );
     }
 
-    console.log('Sending lead to Convex CRM:', { nome: body.nome, cidade: body.cidade });
+    console.log('Sending lead to Convex CRM - full payload:', JSON.stringify(body));
 
     const crmResponse = await fetch(
       'https://app.convexcrm.com.br/api/webhooks/integrations/59fbcefca35e40b8a1a11a8005239d50',

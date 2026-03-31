@@ -25,7 +25,7 @@ const ThankYou = () => {
           <div className="max-w-lg mx-auto text-center">
             <div className="bg-card rounded-2xl shadow-[0_4px_30px_rgba(12,76,199,0.12)] p-10">
               <div className="flex justify-center mb-6">
-                <CheckCircle className="w-20 h-20 text-green-500" />
+                <CheckCircle className="w-20 h-20 text-primary" />
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
                 Obrigado!

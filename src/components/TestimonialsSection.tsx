@@ -1,8 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
-import cliente1 from "@/assets/cliente-1.png";
-import cliente2 from "@/assets/cliente-2.png";
-import cliente3 from "@/assets/cliente-3.png";
 
 const TestimonialsSection = () => {
   const scrollToSimulator = () => {
@@ -14,19 +11,19 @@ const TestimonialsSection = () => {
 
   const clientes = [
     {
-      imagem: cliente1,
-      nome: "Maria Silva",
-      beneficio: "Financiamento aprovado",
+      imagem: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face",
+      nome: "Carlos Eduardo",
+      beneficio: "Financiamento de veículo aprovado",
     },
     {
-      imagem: cliente2,
-      nome: "João Santos",
-      beneficio: "Crédito consignado",
+      imagem: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=face",
+      nome: "Mariana Costa",
+      beneficio: "Crédito imobiliário liberado",
     },
     {
-      imagem: cliente3,
-      nome: "Ana Oliveira",
-      beneficio: "Empréstimo pessoal",
+      imagem: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face",
+      nome: "Roberto Almeida",
+      beneficio: "Empréstimo consignado",
     },
   ];
 

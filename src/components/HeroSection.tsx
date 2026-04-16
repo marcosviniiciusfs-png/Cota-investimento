@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
-import heroBanner from "@/assets/hero-banner.png";
+import HeroIllustration from "@/components/HeroIllustration";
 
 interface HeroSectionProps {
   onSimulateClick: () => void;
@@ -17,8 +17,15 @@ const HeroSection = ({ onSimulateClick }: HeroSectionProps) => {
     <section className="py-16 md:py-24" style={{ backgroundColor: '#e7f3ff' }}>
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Coluna Esquerda - Texto e CTA */}
-          <div className="space-y-6" style={{ animation: 'slideInLeft 1s ease-out forwards' }}>
+          {/* Coluna Esquerda - Ilustração */}
+          <div className="relative order-1" style={{ animation: 'slideInLeft 1s ease-out forwards' }}>
+            <div className="relative z-10">
+              <HeroIllustration />
+            </div>
+          </div>
+
+          {/* Coluna Direita - Texto e CTA */}
+          <div className="space-y-6 order-2" style={{ animation: 'slideInRight 1s ease-out forwards' }}>
             <div className="inline-block">
               <p className="text-primary text-sm font-semibold uppercase tracking-wider mb-2">
                 + DE 1000 SIMULAÇÕES REALIZADAS
@@ -32,7 +39,7 @@ const HeroSection = ({ onSimulateClick }: HeroSectionProps) => {
             {/* Lista de Benefícios */}
             <div className="space-y-3">
               {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-center gap-3" style={{ animation: `slideInLeft 0.8s ease-out ${0.2 + index * 0.15}s forwards`, opacity: 0 }}>
+                <div key={index} className="flex items-center gap-3" style={{ animation: `slideInRight 0.8s ease-out ${0.2 + index * 0.15}s forwards`, opacity: 0 }}>
                   <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
                   <span className="text-lg text-foreground font-medium">{benefit}</span>
                 </div>
@@ -40,7 +47,7 @@ const HeroSection = ({ onSimulateClick }: HeroSectionProps) => {
             </div>
 
             {/* Botão de Ação */}
-            <div className="pt-4" style={{ animation: 'slideInLeft 0.8s ease-out 0.65s forwards', opacity: 0 }}>
+            <div className="pt-4" style={{ animation: 'slideInRight 0.8s ease-out 0.65s forwards', opacity: 0 }}>
               <Button
                 onClick={onSimulateClick}
                 size="lg"
@@ -48,17 +55,6 @@ const HeroSection = ({ onSimulateClick }: HeroSectionProps) => {
               >
                 Simular crédito agora →
               </Button>
-            </div>
-          </div>
-
-          {/* Coluna Direita - Imagem */}
-          <div className="relative" style={{ animation: 'slideInRight 1s ease-out forwards' }}>
-            <div className="relative z-10">
-              <img
-                src={heroBanner}
-                alt="Carros e casa - bens para financiar"
-                className="w-full h-auto object-contain drop-shadow-2xl"
-              />
             </div>
           </div>
         </div>

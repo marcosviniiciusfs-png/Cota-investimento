@@ -8,11 +8,11 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Logo e Social */}
           <div>
-            <img src={logoRaz} alt="Cota Investimento" className="h-12 w-auto mb-4" />
+            <img src={logoRaz} alt="Cota Investimentos" className="h-12 w-auto mb-4" />
             <h3 className="text-xl font-bold mb-4">Social</h3>
             <div className="flex gap-4">
               <a
-                href="https://www.instagram.com/razsolucoesfinanceiras/"
+                href="https://www.instagram.com/grupocotaconsorcio"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
@@ -23,7 +23,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="https://www.facebook.com/profile.php?id=61582686150934&locale=pt_BR"
+                href="https://www.facebook.com/profile.php?id=61552014638650"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
@@ -92,7 +92,7 @@ const Footer = () => {
 
         <div className="border-t border-white/20 pt-6 text-center">
           <p className="text-white/90 text-sm">
-            Copyright 2025 - Todos os direitos reservados por Cota Investimento
+            Copyright 2025 - Todos os direitos reservados por Cota Investimentos
           </p>
         </div>
       </div>

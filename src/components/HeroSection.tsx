@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
-import HeroIllustration from "@/components/HeroIllustration";
+import heroImage from "@/assets/hero-image.png";
 
 interface HeroSectionProps {
   onSimulateClick: () => void;
@@ -17,10 +17,14 @@ const HeroSection = ({ onSimulateClick }: HeroSectionProps) => {
     <section className="py-16 md:py-24" style={{ backgroundColor: '#e7f3ff' }}>
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Coluna Esquerda - Ilustração */}
+          {/* Coluna Esquerda - Imagem Real */}
           <div className="relative order-1" style={{ animation: 'slideInLeft 1s ease-out forwards' }}>
             <div className="relative z-10">
-              <HeroIllustration />
+              <img
+                src={heroImage}
+                alt="Casa, carro e retro escavadeira - Cota Investimentos"
+                className="w-full h-auto max-w-lg mx-auto drop-shadow-2xl"
+              />
             </div>
           </div>
 

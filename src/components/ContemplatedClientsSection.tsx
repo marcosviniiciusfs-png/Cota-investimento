@@ -119,11 +119,11 @@ const ContemplatedClientsSection = () => {
                   className="flex-shrink-0 px-2"
                   style={{ width: `${100 / ITEMS_PER_VIEW}%` }}
                 >
-                  <div className="bg-card rounded-xl shadow-md overflow-hidden w-full aspect-[4/3]">
+                  <div className="bg-card rounded-xl shadow-md overflow-hidden w-full aspect-square">
                     <img
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-top"
                     />
                   </div>
                 </div>

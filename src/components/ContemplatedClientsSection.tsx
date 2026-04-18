@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronLeft, ChevronRight, Trophy } from "lucide-react";
 
 import client1 from "@/assets/clients/client-1.jpeg";
@@ -26,35 +26,56 @@ const clientImages = [
 const ITEMS_PER_VIEW = 3;
 
 const ContemplatedClientsSection = () => {
-  const [startIndex, setStartIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const total = clientImages.length;
 
-  const totalGroups = clientImages.length;
+  const goTo = useCallback(
+    (index: number) => {
+      if (isTransitioning) return;
+      setIsTransitioning(true);
+      setCurrentIndex(index);
+      setTimeout(() => setIsTransitioning(false), 500);
+    },
+    [isTransitioning]
+  );
 
-  const nextGroup = useCallback(() => {
-    setStartIndex((prev) => (prev + 1) % totalGroups);
-  }, [totalGroups]);
+  const next = useCallback(() => {
+    goTo((currentIndex + 1) % total);
+  }, [currentIndex, total, goTo]);
 
-  const prevGroup = useCallback(() => {
-    setStartIndex((prev) => (prev - 1 + totalGroups) % totalGroups);
-  }, [totalGroups]);
+  const prev = useCallback(() => {
+    goTo((currentIndex - 1 + total) % total);
+  }, [currentIndex, total, goTo]);
+
+  const resetInterval = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % total);
+    }, 4000);
+  }, [total]);
 
   useEffect(() => {
-    const interval = setInterval(nextGroup, 3000);
-    return () => clearInterval(interval);
-  }, [nextGroup]);
+    resetInterval();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [resetInterval]);
 
-  const getVisibleImages = () => {
-    const images = [];
-    for (let i = 0; i < ITEMS_PER_VIEW; i++) {
-      images.push(clientImages[(startIndex + i) % clientImages.length]);
-    }
-    return images;
+  const handlePrev = () => {
+    prev();
+    resetInterval();
+  };
+
+  const handleNext = () => {
+    next();
+    resetInterval();
   };
 
   return (
     <section id="clientes" className="py-16 md:py-20 bg-secondary/20">
       <div className="container mx-auto px-4">
-        {/* Título */}
         <div className="text-center mb-12 max-w-3xl mx-auto">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Trophy className="w-8 h-8 text-primary" />
@@ -67,50 +88,61 @@ const ContemplatedClientsSection = () => {
           </p>
         </div>
 
-        {/* Grid 3x3 */}
-        <div className="max-w-5xl mx-auto relative">
-          {/* Setas de navegação */}
+        <div className="max-w-3xl mx-auto relative">
           <button
-            onClick={prevGroup}
+            onClick={handlePrev}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-colors -translate-x-1/2"
             aria-label="Anterior"
           >
-            <ChevronLeft className="w-6 h-6 text-primary" />
+            <ChevronLeft className="w-5 h-5 text-primary" />
           </button>
           <button
-            onClick={nextGroup}
+            onClick={handleNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-colors translate-x-1/2"
             aria-label="Próximo"
           >
-            <ChevronRight className="w-6 h-6 text-primary" />
+            <ChevronRight className="w-5 h-5 text-primary" />
           </button>
 
-          {/* Grid de imagens */}
-          <div className="grid grid-cols-3 gap-4 px-8 md:px-10">
-            {getVisibleImages().map((image, index) => (
-              <div
-                key={`${startIndex + index}`}
-                className="bg-card rounded-xl shadow-md overflow-hidden transition-transform duration-500 hover:scale-105"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-auto object-contain"
-                />
-              </div>
-            ))}
+          {/* Carousel viewport */}
+          <div className="overflow-hidden px-8 md:px-10">
+            <div
+              className="flex"
+              style={{
+                transform: `translateX(-${currentIndex * (100 / ITEMS_PER_VIEW)}%)`,
+                transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+              }}
+            >
+              {clientImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 px-2"
+                  style={{ width: `${100 / ITEMS_PER_VIEW}%` }}
+                >
+                  <div className="bg-card rounded-xl shadow-md overflow-hidden w-full aspect-[4/3]">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Indicadores */}
           <div className="flex justify-center gap-2 mt-6">
             {clientImages.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setStartIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === startIndex ? "bg-primary w-6" : "bg-primary/30"
+                onClick={() => {
+                  goTo(index);
+                  resetInterval();
+                }}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? "bg-primary w-6" : "bg-primary/30"
                 }`}
-                aria-label={`Ir para grupo ${index + 1}`}
+                aria-label={`Ir para imagem ${index + 1}`}
               />
             ))}
           </div>

@@ -165,9 +165,9 @@ const Simulator = () => {
       console.error("Erro ao enviar para Make:", error);
     });
 
-    // Envia para o webhook da Raz Soluções
+    // Envia para o webhook
     fetch(
-      'https://uxttihjsxfowursjyult.supabase.co/functions/v1/form-webhook/923d91cc523d0fc24a11a57d01a933a30bf6b0637738c06e13e5a60a9ea3ab56',
+      'https://uxttihjsxfowursjyult.supabase.co/functions/v1/form-webhook/c7eb8bb525eb1ee7e75633858ff76c5c1840df6e140f22c36d7f79a90bcd9570',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
